@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vorapol | Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono (for code look) & Prompt (for Thai) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Prompt:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "Prompt", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              accent: "#38bdf8", // Light Blue
+              secondary: "#818cf8", // Indigo
+              dark: "#0f172a",
+              card: "#1e293b",
+            },
+            animation: {
+              blob: "blob 7s infinite",
+              "fade-in": "fadeIn 0.5s ease-out forwards",
+            },
+            keyframes: {
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
+              },
+              fadeIn: {
+                "0%": { opacity: "0", transform: "translateY(10px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+      }
+
+      .glass-panel {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .code-block {
+        background: #0f172a;
+        border-left: 3px solid #38bdf8;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* Hide sections by default */
+      .content-section {
+        display: none;
+      }
+
+      /* Active section animation */
+      .content-section.active {
+        display: block;
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .nav-item.active {
+        background-color: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+        border-right: 3px solid #38bdf8;
+      }
+
+      @media (max-width: 768px) {
+        .nav-item.active {
+          border-right: none;
+          border-bottom: 3px solid #38bdf8;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-dark text-slate-300 font-sans h-screen overflow-hidden relative selection:bg-accent selection:text-dark"
+  >
+    <!-- Animated Background Blobs -->
+    <div
+      class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none"
+    >
+      <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+      ></div>
+      <div
+        class="absolute top-0 right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"
+      ></div>
+      <div
+        class="absolute -bottom-8 left-1/3 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
+      ></div>
+    </div>
+
+    <!-- Main Layout -->
+    <div
+      class="max-w-7xl mx-auto h-full p-4 md:p-8 flex flex-col md:flex-row gap-6"
+    >
+      <!-- Sidebar Navigation -->
+      <aside
+        class="glass-panel w-full md:w-80 rounded-2xl p-6 flex flex-col justify-between h-auto md:h-full shrink-0 z-20"
+      >
+        <div>
+          <!-- Profile Header -->
+          <div class="flex flex-col items-center mb-8 text-center">
+            <div
+              class="w-24 h-24 rounded-full bg-gradient-to-tr from-accent to-purple-600 p-1 mb-4 shadow-lg shadow-accent/20"
+            >
+              <div
+                class="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden"
+              >
+                <!-- Placeholder Avatar -->
+                <img
+                  src="img/me.jpg"
+                  alt="Vorapol"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <h1 class="text-2xl font-bold text-white tracking-tight">
+              Vorapol
+            </h1>
+            <p class="text-sm text-accent font-mono mt-1">CS Student & Dev</p>
+          </div>
+
+          <!-- Navigation Links -->
+          <nav class="space-y-2 hidden md:block">
+            <button
+              onclick="switchTab('home')"
+              class="nav-item active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all text-left"
+            >
+              <i data-lucide="home" class="w-5 h-5"></i> Home
+            </button>
+            <button
+              onclick="switchTab('about')"
+              class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all text-left"
+            >
+              <i data-lucide="user" class="w-5 h-5"></i> About Me
+            </button>
+            <button
+              onclick="switchTab('skills')"
+              class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all text-left"
+            >
+              <i data-lucide="cpu" class="w-5 h-5"></i> Skills
+            </button>
+            <button
+              onclick="switchTab('projects')"
+              class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all text-left"
+            >
+              <i data-lucide="folder-git-2" class="w-5 h-5"></i> Projects
+            </button>
+            <button
+              onclick="switchTab('contact')"
+              class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all text-left"
+            >
+              <i data-lucide="mail" class="w-5 h-5"></i> Contact
+            </button>
+          </nav>
+        </div>
+
+        <!-- Social Footer (Sidebar) -->
+        <div
+          class="hidden md:flex gap-4 justify-center mt-4 pt-6 border-t border-slate-700"
+        >
+          <a
+            href="https://github.com/Vorapol2004"
+            target="_blank"
+            class="text-slate-400 hover:text-white transition-colors"
+            ><i data-lucide="github" class="w-5 h-5"></i
+          ></a>
+          <a
+            href="mailto:vorapolanananusit@gmail.com"
+            class="text-slate-400 hover:text-white transition-colors"
+            ><i data-lucide="mail" class="w-5 h-5"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/vorapol-anananusit-466591336/"
+            class="text-slate-400 hover:text-white transition-colors"
+            ><i data-lucide="linkedin" class="w-5 h-5"></i
+          ></a>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main
+        class="glass-panel w-full rounded-2xl relative overflow-hidden flex-1 h-[calc(100vh-140px)] md:h-full"
+      >
+        <div class="h-full overflow-y-auto p-6 md:p-10 custom-scroll">
+          <h2 class="text-3xl font-bold text-white mb-6">Home</h2>
+          <p class="text-slate-400">This is the index file (copy of HomePage.html).</p>
+          <p class="mt-4 text-sm text-slate-500">If you want this to be the homepage served by GitHub Pages, keep this file at the repo root.</p>
+        </div>
+      </main>
+    </div>
+
+    <script>lucide.createIcons();</script>
+  </body>
+</html>
